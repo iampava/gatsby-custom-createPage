@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Pokemon({ pageContext: { pokemon } }) {
   return (
     <div style={{ width: 960, margin: "4rem auto" }}>
