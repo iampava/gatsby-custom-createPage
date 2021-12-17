@@ -11,12 +11,23 @@ exports.createPages = async ({ actions: { createPage } }) => {
     return JSON.parse(content);
   });
 
-  // Create a page for each Pokémon.
   allPokemon.forEach(pokemon => {
+    // Create a page for each Pokémon.
     createPage({
       path: `/pokemon/${pokemon.name}/`,
       component: require.resolve("./src/templates/pokemon.js"),
       context: { pokemon },
     })
+
+    // Create 2 more sub-pages for Weekend days
+    const weekend = ['Saturday', 'Sunday'];
+
+    weekend.forEach((day) => (
+      createPage({
+        path: `/pokemon/${pokemon.name}/day/${day}`,
+        component: require.resolve("./src/templates/weekend-pokemon.js"),
+        context: { pokemon, day },
+      })
+    ));
   })
 }
